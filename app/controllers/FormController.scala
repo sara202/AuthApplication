@@ -11,7 +11,7 @@ import play.api.mvc._
 class FormController @Inject() extends Controller {
 
   def authForm = Action {
-    Ok(views.html.authFormPage("ready"))
+    Ok(views.html.authFormPage())
   }
 
 }
