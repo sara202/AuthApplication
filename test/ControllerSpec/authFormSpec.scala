@@ -14,21 +14,24 @@ class authFormSpec extends PlaySpec with OneAppPerTest {
 
   "FormController" should {
     "not return 404" when {
-      "we try to hit the route /authFormPage"in {
+      "we try to hit the route /authFormPage" in {
         route(app, FakeRequest(GET, "/authFormPage")).map(status(_)) must not be Some(NOT_FOUND)
       }
     }
+  }
 
-
-    "render a page" when {
-      "we try to hit the route /authFormPage" in {
+    "authFormPage" should {
+      "return a text box for Client ID and Client Secret" in {
         val result = route(app, FakeRequest(GET, "/authFormPage"))
         result.map(status(_)) mustBe Some(OK)
         val text: String = result.map(contentAsString(_)).get
-        text must include ("Welcome to Play")
-
-
+        text must include("Client ID")
+        text must include("Client Secret")
       }
-    }}
 
-}
+    }
+
+
+  }
+
+
