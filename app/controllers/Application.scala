@@ -7,25 +7,20 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import views.html.helper
 
 class Application extends Controller {
 
-
-  val form = Form(
-    tuple(
-      "clientID" -> text,
-      "clientSecret" -> text
-    )
-  )
 
   def index = Action {
     Ok(views.html.testForm())
   }
 
-  def submit = Action { implicit request =>
-    val (clientID, clientSecret) = form.bindFromRequest.get
-    val clientIDString = clientID.toString
-    val clientSecretString = clientSecret
-    Ok("Client ID = " + clientIDString + "\nClient Secret = " + clientSecretString)
+  def submit = Action {
+    val url = "https://www-qa.tax.service.gov.uk/oauth/authorize?response_type=code&client_id=yq5WiFXVEqvjNymfThqrjlUg5ZUa&scope=write:trusts-estates&redirect_uri=https://www-qa.tax.service.gov.uk/trusts?userID='username1'&password='password1'"
+    Redirect(url)
   }
+
+
+
 }
